@@ -1,42 +1,92 @@
 package token
 
-// Type - contains information about token type
+// Type definition
 type Type string
 
 const (
-	// ILLEGAL - illegal token mark
+	// ILLEGAL const
 	ILLEGAL = "ILLEGAL"
-	// EOF - eof
+
+	// EOF const
 	EOF = "EOF"
-	// IDENT + literals
+
+	// IDENT const
 	IDENT = "IDENT" // add, foobar, x, y, ...
-	// INT - int
-	INT = "INT"
-	// ASSIGN =
+
+	// INT const
+	INT = "INT" // 1343456
+
+	// ASSIGN const
 	ASSIGN = "="
-	// PLUS +
+
+	// PLUS const
 	PLUS = "+"
+
+	// MINUS const
+	MINUS = "-"
+
+	// BANG const
+	BANG = "!"
+
+	// ASTERISK const
+	ASTERISK = "*"
+
+	// SLASH const
+	SLASH = "/"
+
+	// LT lt
+	LT = "<"
+
+	// GT gt
+	GT = ">"
+
+	// EQ eq
+	EQ = "=="
+
+	// NOT_EQ not eq
+	NOT_EQ = "!="
+
 	// COMMA ,
 	COMMA = ","
+
 	// SEMICOLON ;
 	SEMICOLON = ";"
-	// LPAREN (
-	LPAREN = "("
 
-	// RPAREN )
+	LPAREN = "("
 	RPAREN = ")"
-	// LBRACE  {
 	LBRACE = "{"
-	// RBRACE }
 	RBRACE = "}"
-	// FUNCTION function
+
+	// Keywords
 	FUNCTION = "FUNCTION"
-	// LET let
-	LET = "LET"
+	LET      = "LET"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	RETURN   = "RETURN"
 )
 
-// Token - token struct definition
+// Token type
 type Token struct {
 	Type    Type
 	Literal string
+}
+
+var keywords = map[string]Type{
+	"fn":     FUNCTION,
+	"let":    LET,
+	"true":   TRUE,
+	"false":  FALSE,
+	"if":     IF,
+	"else":   ELSE,
+	"return": RETURN,
+}
+
+// LookupIdent checking for identifier
+func LookupIdent(ident string) Type {
+	if tok, ok := keywords[ident]; ok {
+		return tok
+	}
+	return IDENT
 }
