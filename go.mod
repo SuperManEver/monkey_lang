@@ -1,3 +1,3 @@
-module github.com/SuperManEver/monkey
+module github.com/SuperManEver/monkey_lang
 
 go 1.12
